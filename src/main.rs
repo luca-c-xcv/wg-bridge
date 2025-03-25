@@ -8,6 +8,16 @@ mod cli;
 mod core;
 mod ui;
 
+use core::logger::Logger;
+
+use chrono::Local;
+
+
+
 fn main() {
-    println!("Welcome to wg-bridge CLI!");
+  // Initializing logger
+  let date = Local::now().format("%Y-%m-%d").to_string();
+  let log_path = &format!("./{date}.log");
+  Logger::init(log_path);
+  let _log = Logger::get();
 }
