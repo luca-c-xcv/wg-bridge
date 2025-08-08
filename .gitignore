@@ -1,5 +1,7 @@
 .github
 .pre-commit-check
 test.sh
+cobertura.xml
+coverage.xml
 
 target/

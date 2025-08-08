@@ -1,0 +1,36 @@
+name: Coverage
+
+on:
+  push:
+    branches: [rust/main]
+  pull_request:
+    branches: [rust/main]
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+
+    - name: Install cargo-tarpaulin
+      run: cargo install cargo-tarpaulin
+
+    - name: Run coverage
+      run: cargo tarpaulin --out Xml
+
+    - name: Rename coverage report
+      run: mv cobertura.xml coverage.xml
+
+    - name: Upload to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        files: coverage.xml
+        token: ${{ secrets.CODECOV_TOKEN }}
