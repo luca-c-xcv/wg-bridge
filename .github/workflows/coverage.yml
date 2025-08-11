@@ -2,9 +2,9 @@ name: Coverage
 
 on:
   push:
-    branches: [rust/main]
+    branches: [main]
   pull_request:
-    branches: [rust/main]
+    branches: [main]
 
 jobs:
   coverage:
