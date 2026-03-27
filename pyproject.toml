@@ -4,15 +4,32 @@ version = "0.0.0"
 description = "Simplified Wireguard VPN manager"
 readme = "README.md"
 requires-python = ">=3.12"
-license = {text = "AGPL-3.0-or-later"}  # Upgraded to Affero GPL v3 or later
+license = {text = "AGPL-3.0-or-later"}  
 
 dependencies = [
-    # Core runtime dependencies will be added here later
+    "wireguard-tools",
+    "pyroute2",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "black",
+    "ruff",
+    "isort",
+    "pyright",
+    "pytest",
+    "pytest-cov",
+    "pre-commit",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "--cov=src --cov-report=xml --cov-report=term"
+
 [project.urls]
-Repository = "https://github.com/moonyfringers/ladon"
-Issues = "https://github.com/moonyfringers/ladon/issues"
+Repository = "https://github.com/MoonyFringers/wg-bridge.git"
+Issues = "https://github.com/MoonyFringers/wg-bridge/issues"
 
 [build-system]
 requires = ["setuptools>=65", "wheel"]
@@ -69,3 +86,6 @@ extend-exclude = [
 typeCheckingMode = "strict"
 venvPath = ".."
 venv = ".venv"
+
+[tool.setuptools.packages.find]
+where = ["src"]
